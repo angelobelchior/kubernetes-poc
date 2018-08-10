@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  todo:
+    image: angelobelchior/todo
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - "mongodb"
+    links:
+      - "mongodb"
+    networks:
+      - todo-network
+
+  mongodb:
+    image: tutum/mongodb
+    environment:
+      - AUTH=no
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+    networks:
+      - todo-network
+
+networks: 
+    todo-network:
+        driver: bridge

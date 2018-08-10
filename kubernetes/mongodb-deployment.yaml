@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongodb
+  name: mongodb
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mongodb
+    spec:
+      containers:
+      - env:
+        - name: AUTH
+          value: "no"
+        image: tutum/mongodb
+        name: mongodb
+        ports:
+        - containerPort: 27017
+        - containerPort: 28017
+        resources: {}
+      restartPolicy: Always
+status: {}
